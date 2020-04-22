@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
         ReactPubSeeder::class,
         ReactComSeeder::class,
         FriendSeeder::class,
-        MessageSeeder::class
+        MessageSeeder::class,
+        mediaSeeder::class
         ]);
     }
 }
