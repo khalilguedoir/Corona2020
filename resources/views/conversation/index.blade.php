@@ -3,6 +3,7 @@
 @section('conv')
 
 
+
 	 <!-- ==============================================
 	 Modal Section
 	 =============================================== -->
@@ -33,7 +34,7 @@
 			  <ul>
 
 			   @foreach($users as $user)
-               <a href="#">
+               <a href="{{ route('conversation.show', $user->id) }}">
 			   <li class="list-group-item list-group-item-action">
 				<div class="user-message-details">
 				 <div class="user-message-img">
@@ -60,10 +61,11 @@
 			<div class="conversation-header">
 			 <div class="user-message-details">
 			  <div class="user-message-img">
-			   <img src="http://themashabrand.com/templates/Fluffs/assets/img/users/6.jpg" class="img-responsive img-circle" alt="">
-			  </div>
+			   <img style="margin-top: -5px;" src="http://themashabrand.com/templates/Fluffs/assets/img/users/6.jpg" class="img-responsive img-circle" alt="">
+              </div>
+
 			  <div class="user-message-info">
-			   <h4>John Doe</h4>
+			   <h4 style="margin-top: 10px;">John Doe</h4>
 			   <p>Online</p>
 			  </div><!--/ user-message-info -->
 			 </div><!--/ user-message-details -->

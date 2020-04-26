@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\profile;
+use Carbon\Carbon;
+
 
 class conversation extends Controller
 {
@@ -16,9 +19,9 @@ class conversation extends Controller
      */
     public function index()
     {
-        $profiles = profile::all();
+
         $users = User::select('id','name')->where('id', '!=', Auth::user()->id)->get();
-        return view('conversation.index', compact('users','profiles'));
+        return view('conversation.index', compact('users'));
     }
 
     /**
@@ -39,7 +42,14 @@ class conversation extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $msg = new message;
+        $msg->profile1_id =  Auth::id();
+        $msg->profile2_id = $request->to;
+        $msg->msg = $request->content;
+        $msg->created_at = Carbon::now();
+        $msg->save();
+        return redirect()->route('conversation.show', $request->to)->with('sent', 'message sent');
     }
 
     /**
@@ -50,7 +60,10 @@ class conversation extends Controller
      */
     public function show($id)
     {
-        //
+
+        $users = User::select('id','name')->where('id', '!=', Auth::user()->id)->get();
+        $user_one = User::find($id);
+        return view('conversation.show', compact('user_one', 'users'));
     }
 
     /**
