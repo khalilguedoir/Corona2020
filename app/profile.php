@@ -11,7 +11,7 @@ class profile extends Model
     {
         return $this->hasMany('App\publication');
     }
- 
+
     public function commentaire()
     {
         return $this->hasMany('App\commentaire');
@@ -28,7 +28,7 @@ class profile extends Model
     {
         return $this->hasMany('App\friend');
     }
-    public function message()
+    public function messages()
     {
         return $this->hasMany('App\message');
     }

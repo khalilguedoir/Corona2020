@@ -44,7 +44,7 @@ class conversation extends Controller
     {
 
         $msg = new message;
-        $msg->profile1_id =  Auth::id();
+        $msg->profile_id =  Auth::id();
         $msg->profile2_id = $request->to;
         $msg->msg = $request->content;
         $msg->created_at = Carbon::now();
@@ -63,7 +63,11 @@ class conversation extends Controller
 
         $users = User::select('id','name')->where('id', '!=', Auth::user()->id)->get();
         $user_one = User::find($id);
-        return view('conversation.show', compact('user_one', 'users'));
+        $messages_sent = Auth::user()->profile->messages->where('profile2_id', '=', $id);
+        $messages_rec = User::find($id)->profile->messages->where('profile_id', '=', $id);
+
+
+        return view('conversation.show', compact('user_one', 'users', 'messages_sent', 'messages_rec' ));
     }
 
     /**

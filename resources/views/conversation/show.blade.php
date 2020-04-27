@@ -1,6 +1,7 @@
 @extends('layouts.conv')
 
 @section('conv')
+
 @if (session('sent'))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
 {{ session('sent') }}
@@ -81,78 +82,42 @@
 			</div><!--/ conversation-header -->
 
 			<div class="conversation-container">
-
+            @foreach ($messages_sent as $message_sent)
 			 <div class="convo-box pull-right">
 			  <div class="convo-area">
 			   <div class="convo-message">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>
+				<p class>{{ $message_sent->msg }}</p>
 			   </div><!--/ convo-message-->
-			   <span>Sat, Aug 23, 1:08 PM</span>
+			   <span>{{ $message_sent->created_at}}</span>
 			  </div><!--/ convo-area -->
 			  <div class="convo-img">
 			   <img src="{{ $user_one->profile->img }}" alt="" class="img-responsive img-circle">
 			  </div><!--/ convo-img -->
-			 </div><!--/ convo-box -->
+             </div><!--/ convo-box -->
+             @endforeach
 
+
+
+
+
+
+             @foreach ($messages_rec as $message_rec)
 			 <div class="convo-box convo-left">
 			  <div class="convo-area convo-left">
 			   <div class="convo-message">
-				<p>Cras ultricies ligula.</p>
+				<p>{{$message_rec->msg }}</p>
 			   </div><!--/ convo-message-->
-			   <span>5 minutes ago</span>
+			   <span>{{ $message_rec->created_at}}</span>
 			  </div><!--/ convo-area -->
 			  <div class="convo-img">
 			   <img src="http://themashabrand.com/templates/Fluffs/assets/img/users/6.jpg" alt="" class="img-responsive img-circle">
 			  </div><!--/ convo-img -->
-			 </div><!--/ convo-box -->
+             </div><!--/ convo-box -->
+             @endforeach
 
-			 <div class="convo-box pull-right">
-			  <div class="convo-area">
-			   <div class="convo-message">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>
-			   </div><!--/ convo-message-->
-			   <span>Sat, Aug 23, 1:08 PM</span>
-			  </div><!--/ convo-area -->
-			  <div class="convo-img">
-			   <img src="{{ $user_one->profile->img }}" alt="" class="img-responsive img-circle">
-			  </div><!--/ convo-img -->
-			 </div><!--/ convo-box -->
 
-			 <div class="convo-box convo-left">
-			  <div class="convo-area convo-left">
-			   <div class="convo-message">
-				<p>Lorem ipsum dolor sit amet</p>
-			   </div><!--/ convo-message-->
-			   <span>2 minutes ago</span>
-			  </div><!--/ convo-area -->
-			  <div class="convo-img">
-			   <img src="http://themashabrand.com/templates/Fluffs/assets/img/users/6.jpg" alt="" class="img-responsive img-circle">
-			  </div><!--/ convo-img -->
-			 </div><!--/ convo-box -->
 
-			 <div class="convo-box pull-right">
-			  <div class="convo-area">
-			   <div class="convo-message">
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor.</p>
-			   </div><!--/ convo-message-->
-			   <span>Sat, Aug 23, 1:08 PM</span>
-			  </div><!--/ convo-area -->
-			  <div class="convo-img">
-			   <img src="{{ $user_one->profile->img }}" alt="" class="img-responsive img-circle">
-			  </div><!--/ convo-img -->
-			 </div><!--/ convo-box -->
 
-			 <div class="convo-box convo-left">
-			  <div class="convo-area convo-left">
-			   <div class="convo-message">
-				<p>Typing...</p>
-			   </div><!--/ convo-message-->
-			   <span>2 minutes ago</span>
-			  </div><!--/ convo-area -->
-			  <div class="convo-img">
-			   <img src="http://themashabrand.com/templates/Fluffs/assets/img/users/6.jpg" alt="" class="img-responsive img-circle">
-			  </div><!--/ convo-img -->
-			 </div><!--/ convo-box -->
 
             </div><!--/ conversation-container -->
             <form action="{{ route('conversation.store') }}" method="post">

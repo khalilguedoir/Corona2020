@@ -15,12 +15,14 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('profile1_id');
+            $table->unsignedBigInteger('profile_id');
             $table->unsignedBigInteger('profile2_id');
             $table->string('msg');
-            $table->foreign('profile1_id')->references('id')->on('profiles');
+            $table->dateTime('created_at')->useCurrent();
+            $table->dateTime('read_at')->nullable();
+            $table->foreign('profile_id')->references('id')->on('profiles');
             $table->foreign('profile2_id')->references('id')->on('profiles');
-            $table->timestamps();
+
         });
     }
 

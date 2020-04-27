@@ -3,13 +3,20 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class message extends Model
 {
     protected $fillable = [
-        'profile1_id', 'profile2_id', 'msg', 'created_at', 'updated_at'
+        'profile_id', 'profile2_id', 'msg', 'created_at', 'read_at'
     ];
 
-    public $timestamp = false;
+    public $timestamps = false;
     protected $dates = ['created_at', 'read_at'];
+
+
+    public function profile()
+    {
+        return $this->belongsTo('App\message');
+    }
 }
