@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+
 class CreateMediaTable extends Migration
 {
     /**
@@ -18,6 +19,7 @@ class CreateMediaTable extends Migration
             $table->unsignedBigInteger('profile_id')->unsigned();
             $table->string('source');
             $table->timestamps();
+            $table->foreign('profile_id')->references('id')->on('profiles');
         });
     }
 

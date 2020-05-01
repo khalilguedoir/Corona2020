@@ -1,85 +1,34 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\friend;
 use Illuminate\Http\Request;
 
 class FriendController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index()
     {
-        //
+        
+    }
+    public static function infoPerson($id)
+    {
+        $person= DB::table('profiles')
+        ->select('fname','lname','img','bio')
+        ->where('id','=',$id)
+        ->get();
+        return ($person);
+
+    }
+    public static function GetFriends($id )
+    {
+        $friends= DB::table('friends')
+        ->select('profile_id_to','profile_id_from')
+        ->where('profile_id_from','=',$id,' OR ','profile_id_to','=',$id)
+        ->get();
+        return ($friends);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\friend  $friend
-     * @return \Illuminate\Http\Response
-     */
-    public function show(friend $friend)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\friend  $friend
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(friend $friend)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\friend  $friend
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, friend $friend)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\friend  $friend
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(friend $friend)
-    {
-        //
-    }
 }

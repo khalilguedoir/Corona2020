@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
         ReactComSeeder::class,
         FriendSeeder::class,
         MessageSeeder::class,
-        MediaSeeder::class
+        mediaSeeder::class
         ]);
     }
 }
