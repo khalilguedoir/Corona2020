@@ -43,36 +43,15 @@
 							</li>
 							<li>
 								<a href="companies.html" title="">
-									<span><img src="{{asset('template/images/icon2.png')}}" alt=""></span>
-									Companies
-                                </a>   
-								<ul>
-									<li><a href="companies.html" title="">Companies</a></li>
-									<li><a href="company-profile.html" title="">Company Profile</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="projects.html" title="">
-									<span><img src="{{asset('template/images/icon3.png')}}" alt=""></span>
-									Projects
-								</a>
-							</li>
-							<li>
-								<a href="profiles.html" title="">
 									<span><img src="{{asset('template/images/icon4.png')}}" alt=""></span>
 									Profiles
-								</a>
+                                </a>   
 								<ul>
-									<li><a href="user-profile.html" title="">User Profile</a></li>
-									<li><a href="my-profile-feed.html" title="">my-profile-feed</a></li>
+									<li><a href="companies.html" title="">User Profile</a></li>
+									<li><a href="company-profile.html" title="">My-profile-feed</a></li>
 								</ul>
 							</li>
-							<li>
-								<a href="jobs.html" title="">
-									<span><img src="{{asset('template/images/icon5.png')}}" alt=""></span>
-									Jobs
-								</a>
-							</li>
+					
 							<li>
 								<a href="#" title="" class="not-box-openm">
 									<span><img src="{{asset('template/images/icon6.png')}}" alt=""></span>
