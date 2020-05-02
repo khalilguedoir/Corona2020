@@ -2,6 +2,7 @@
 	<!-- Begin -->
 	@auth
 	<?php 
+	//el image ta3 el user 
 		$img = Auth::user()->profile()->get('img');
 		if($img[0]->img == null)
 		{
@@ -10,6 +11,9 @@
 		{
 			$imgProfile = $img[0]->img;
 		}
+
+	//Nom w prenom ta3 el user
+	$userNames = Auth::user()->profile()->get('fname');
 	?>
 	@endauth
 	<!-- END -->
@@ -177,7 +181,7 @@
 					<div class="user-account">
 						<div class="user-info">
 							<img src="{{$imgProfile}}" width="30px" height="30px" alt="">
-							<a href="#" title="">John</a>
+							<a href="#" title="">{{$userNames[0]->fname}}</a>
 							<i class="fa fa-sort-down"></i>
 						</div>
 						<div class="user-account-settingss" id="users">
