@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class profile extends Model
 {
     protected $guarded = [];
+    protected $dates = [
+        'birth',
+    ];
     //relation with publication
     public function publication()
     {
