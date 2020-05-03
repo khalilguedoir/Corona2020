@@ -26,7 +26,6 @@
 	use App\Http\Controllers\CommentaireController ;
 	use App\Http\Controllers\FriendController ;
 	?>
-	<?php foreach ($myinfo as $info){ ?>
 
 	<div class="wrapper">
 		<header>
@@ -108,6 +107,10 @@
 
 						</ul>
 					</nav><!--nav end-->
+					<?php 
+						$info = $myinfo[0];
+						?>
+
 					<div class="menu-btn">
 						<a href="#" title=""><i class="fa fa-bars"></i></a>
 					</div><!--menu-btn end-->
@@ -361,7 +364,6 @@
 		</footer><!--footer end-->
 
 
-<?php } ?>
 <script type="text/javascript" src="http://127.0.0.1:8000/js/jquery.min.js" ></script>
 <script type="text/javascript" src="http://127.0.0.1:8000/js/popper.js"></script>
 <script type="text/javascript" src="http://127.0.0.1:8000/js/bootstrap.min.js"></script>
