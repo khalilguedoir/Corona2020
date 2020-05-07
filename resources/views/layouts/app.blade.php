@@ -14,6 +14,7 @@
     
     <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
     <script type="text/javascript" src="{{asset('template/js/popper.js')}}"></script>
+    <script type="text/javascript" src="{{asset('template/js/bootstrap.js')}}"></script>
     <script type="text/javascript" src="{{asset('template/js/jquery.mCustomScrollbar.js')}}"></script>
     <script type="text/javascript" src="{{asset('template/lib/slick/slick.min.js')}}"></script>
     <script type="text/javascript" src="{{asset('template/js/scrollbar.js')}}"></script>
@@ -35,6 +36,7 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('template/lib/slick/slick-theme.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('template/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('template/css/responsive.css')}}">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script>
     
     @yield('linkSheet')
 </head>
@@ -43,11 +45,12 @@
 @include('layouts.nav')
 <!-- el div class wrapper teb3a tmplate 3ala heka zedtha -->
    <div class="wrapper"> 
-
-        <main class="p-4">
+    <main>
+        <div class="main-section p-4">
             @yield('content')
-        </main>
+        </div>
 
     </div>
+</main>
 </body>
 </html>

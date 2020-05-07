@@ -14,7 +14,7 @@ class publication extends Model
 
     public function commentaire()
     {
-        return $this->hasMany('App\commentaire');
+        return $this->hasMany('App\commentaire','pub_id');
     }
     public function reactPub()
     {
