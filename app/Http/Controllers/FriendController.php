@@ -20,7 +20,8 @@ class FriendController extends Controller
    //hné ena 5arrajt el id ta3 el profile ta3 el user connecté (btw chikoun houa bidou el id ta3 user but for any case of problem or something)
         $friends = Auth::user()->profile()->get('user_id');
         $friends = $friends[0]->user_id;
-                                                                   
+    //Friend request list
+        $request = $this->getFriendRequest($friends);                                          
    //list of friend that send you invitation before and you accepted 
           $listInv=$this->getListFriends('profile_id_to','profileFrom',$friends);
     //list of frind that you send them invitaion and they accepted because they're so Kind <3
@@ -29,7 +30,7 @@ class FriendController extends Controller
      if(($listAccepted->isEmpty()) == ($listInv->isEmpty()))
      {
          if($listAccepted->isEmpty())
-            return view('friends')->with('noFriend',0);
+            return view('friends', compact('request'))->with('noFriend',0);
         else
         {   //fsa5t el profileTo 5ater relation manest7a9hech w ena ki chenboukli 3ala zouz ma3 b3adhhom matod5ol b3adhha
                     // $listAccepted = $listAccepted->forget('profileTo');
@@ -50,16 +51,16 @@ class FriendController extends Controller
                         'lname' => $lista->profileTo->lname, 'img' => $lista->profileTo->img,
                         'updated_at' => $lista->profileTo->updated_at]);
                     }
-                    return view('friends')->with('both',$both);
+                    return view('friends',compact('request'))->with('both',$both);
             
         }
      }else
      {
        //mazelt el parti hedhi ya ziw
        if($listInv->isEmpty())
-       return view('friends')->with('listA',$listAccepted);
+       return view('friends')->with('listA',$listAccepted)->with('request',$request);
        if($listAccepted->isEmpty())
-       return view('friends')->with('listI',$listInv);
+       return view('friends',compact('request'))->with('listI',$listInv);
 
      }
         
@@ -133,6 +134,7 @@ class FriendController extends Controller
     }
 
 
+
     public function getListFriends(String $val1,String $val2,int $friends)
     {
         $list = friend::AreFirends()->where($val1,$friends)->with([$val2 => function($query){
@@ -140,5 +142,18 @@ class FriendController extends Controller
         }]);
         $hiddenItems= ['etat','created_at','updated_at','profile_id_to','id','profile_id_from'];
         return $list->get()->makeHidden($hiddenItems);
+    }
+
+    //fonction t5arrajlek list ta3 el invi sinon idha mab3athlek 7ad invi trajja3lek false
+    public function getFriendRequest(int $friends)
+    {
+        $list = friend::NonFriends()->where('profile_id_to',$friends)->with(['profileFrom' => function($query){
+            $query->select('fname','id','lname','img');
+        }])->get();
+        
+        if($list->isEmpty())
+            return false;
+        
+            return $list;
     }
 }

@@ -48,7 +48,7 @@
                                 </a>   
 								<ul>
 									<li><a href="companies.html" title="">User Profile</a></li>
-									<li><a href="company-profile.html" title="">My Friend List</a></li>
+									<li><a href="{{url('friends')}}" title="">My Friend List</a></li>
 								</ul>
 							</li>
 					
