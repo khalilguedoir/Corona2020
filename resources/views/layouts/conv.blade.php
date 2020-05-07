@@ -1,59 +1,27 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>CodePen - A Pen by  tyut</title>
-<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
-
+	<meta charset="UTF-8">
+	<title>WorkWise Html Template</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/line-awesome.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/line-awesome-font-awesome.min.css') }}">
+	<link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/font-awesome.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.mCustomScrollbar.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('lib/slick/slick.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('lib/slick/slick-theme.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
+	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
-<body>
-<!-- partial:index.partial.html -->
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-
-	    <!-- ==============================================
-		Title and Meta Tags
-		=============================================== -->
-		<meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Fluffs - Ultimate Bootstrap Social Network UI Kit</title>
-		<meta name="description" content="" />
-        <meta name="keywords" content="" />
-        <meta property="og:title" content="" />
-        <meta property="og:url" content="" />
-        <meta property="og:description" content="" />
-
-		<!-- ==============================================
-		Favicons
-		=============================================== -->
-		<link rel="icon" href="assets/img/logo.jpg">
-		<link rel="apple-touch-icon" href="img/favicons/apple-touch-icon.png">
-		<link rel="apple-touch-icon" sizes="72x72" href="img/favicons/apple-touch-icon-72x72.png">
-		<link rel="apple-touch-icon" sizes="114x114" href="img/favicons/apple-touch-icon-114x114.png">
-
-	    <!-- ==============================================
-		CSS
-		=============================================== -->
-
-				<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
 
-		<!-- ==============================================
-		Feauture Detection
-		=============================================== -->
-		<script src="http://themashabrand.com/templates/Fluffs/assets/js/modernizr-custom.js"></script>
-
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
-
-  </head>
-
-<body>
+<body oncontextmenu="return false;">
     @yield('conv')
 </body>
 </html>

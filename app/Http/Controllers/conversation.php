@@ -61,13 +61,13 @@ class conversation extends Controller
     public function show($id)
     {
 
-        $users = User::select('id','name')->where('id', '!=', Auth::user()->id)->get();
+        $users = User::where('id', '!=', Auth::user()->id)->where('id', '!=', $id)->get();
         $user_one = User::find($id);
-        $messages_sent = Auth::user()->profile->messages->where('profile2_id', '=', $id);
-        $messages_rec = User::find($id)->profile->messages->where('profile_id', '=', $id);
-
-
-        return view('conversation.show', compact('user_one', 'users', 'messages_sent', 'messages_rec' ));
+        $messages = message::where('profile_id', Auth::user()->id)
+                                       ->where('profile2_id', $id)
+                                        ->orWhere('profile_id', $id)
+                                        ->where('profile2_id', Auth::user()->id)->get();
+        return view('conversation.show', compact('user_one', 'users', 'messages'));
     }
 
     /**
