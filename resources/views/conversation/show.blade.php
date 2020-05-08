@@ -287,7 +287,7 @@
 								<div class="message-send-area">
 									<form action="{{ route('conversation.store') }}" method="post">
                                     @csrf
-                                    <input type="text" name="to" value="{{ $user_one->id }}" hidden>
+                                    <input type="text" name="to" value="{{ $user_one->profile->id }}" hidden>
 										<div class="mf-field">
 											<input type="text" name="content" placeholder="Type a message here">
 											<button type="submit">Send</button>

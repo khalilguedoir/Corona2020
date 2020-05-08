@@ -32,4 +32,5 @@ class profile extends Model
     {
         return $this->hasMany('App\message');
     }
+
 }

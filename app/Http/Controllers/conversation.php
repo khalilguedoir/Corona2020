@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\profile;
 use Carbon\Carbon;
-
+use Symfony\Component\HttpKernel\Profiler\Profile as ProfilerProfile;
 
 class conversation extends Controller
 {
@@ -20,7 +20,7 @@ class conversation extends Controller
     public function index()
     {
 
-        $users = User::select('id','name')->where('id', '!=', Auth::user()->id)->get();
+        $users = User::where('id', '!=', Auth::user()->id)->get();
         return view('conversation.index', compact('users'));
     }
 
@@ -44,7 +44,7 @@ class conversation extends Controller
     {
 
         $msg = new message;
-        $msg->profile_id =  Auth::id();
+        $msg->profile_id =  Auth::user()->profile->id;
         $msg->profile2_id = $request->to;
         $msg->msg = $request->content;
         $msg->created_at = Carbon::now();
@@ -63,10 +63,10 @@ class conversation extends Controller
 
         $users = User::where('id', '!=', Auth::user()->id)->where('id', '!=', $id)->get();
         $user_one = User::find($id);
-        $messages = message::where('profile_id', Auth::user()->id)
+        $messages = message::where('profile_id', Auth::user()->profile->id)
                                        ->where('profile2_id', $id)
                                         ->orWhere('profile_id', $id)
-                                        ->where('profile2_id', Auth::user()->id)->get();
+                                        ->where('profile2_id', Auth::user()->profile->id)->get();
         return view('conversation.show', compact('user_one', 'users', 'messages'));
     }
 

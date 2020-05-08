@@ -21,7 +21,5 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::get('/home', 'HomeController@index')->name('home');
     Route::resource('/conversation', 'conversation');
-    Route::get('foo', function () {
-        return view('conversation.new');
-    });
+
 });
