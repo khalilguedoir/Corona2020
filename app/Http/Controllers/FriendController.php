@@ -40,14 +40,14 @@ class FriendController extends Controller
                     $both = array();
                     foreach ($listInv as $lista)
                     {
-                        array_push($both,['id'=>$lista->profileFrom->id , 'fname'=>$lista->profileFrom->fname,
+                        array_push($both,['idFriendList' => $lista->id,'id'=>$lista->profileFrom->id , 'fname'=>$lista->profileFrom->fname,
                         'lname' =>  $lista->profileFrom->lname, 'img' => $lista->profileFrom->img,
                         'updated_at' => $lista->updated_at]);
                     
                     }
                     foreach($listAccepted as $lista)
                     {
-                        array_push($both,['id'=>$lista->profileTo->id, 'fname'=>$lista->profileTo->fname,
+                        array_push($both,['idFriendList' => $lista->id,'id'=>$lista->profileTo->id, 'fname'=>$lista->profileTo->fname,
                         'lname' => $lista->profileTo->lname, 'img' => $lista->profileTo->img,
                         'updated_at' => $lista->profileTo->updated_at]);
                     }
@@ -128,9 +128,12 @@ class FriendController extends Controller
      * @param  \App\friend  $friend
      * @return \Illuminate\Http\Response
      */
-    public function destroy(friend $friend)
+    public function destroy($friend)
     {
         //
+        $frienddel = friend::find($friend);
+        $frienddel->delete();
+       return redirect()->route('friends.index')->with('friendDown', 'Hakka tfassa5 3chir 3omrek ? ');
     }
 
 

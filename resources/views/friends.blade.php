@@ -9,14 +9,20 @@
         <img src="{{ ($friends['img']==null) ? asset('images/user_no_image.png'): $friends['img'] }}" width="50px" height="50px" alt="">
             <h3>{{ $friends['fname'] }} {{$friends['lname']}}   </h3>
         <span>Graphic Designer</span>
-        <ul>
-        <li><a href="#" title="" class="followw">Follow</a></li>
-        <li><a href="#" title="" class="envlp"><img src="images/envelop.png" alt=""></a></li>
-        <li><a href="#" title="" class="hire">hire</a></li>
-        </ul>
-        <a href="#" title="">View Profile</a>
+    
+        <a href="{{url('profile/'.$friends['id'].'') }}" title="">View Profile</a>
+        <a href="#" onclick="
+        d = document.getElementById('deleteFriend');
+        d.action = '{{action('FriendController@destroy',  $friends['idFriendList'])}}';
+        event.preventDefault();
+    document.getElementById('deleteFriend').submit();">Delete</a>
         </div>
         @endforeach
+
+        <form id="deleteFriend" action="" method="POST" style="display:none">
+            @csrf
+            @method('DELETE')
+        </form>
 @endif
 
 @if(isset($noFriend))
@@ -31,12 +37,9 @@
                 <img src="{{ ($list->profileTo->img==null) ? asset('images/user_no_image.png'): $list->profileTo->img }}" width="50px" height="50px" alt="">
                     <h3>{{ $list->profileTo->fname }} {{$list->profileTo->lname}}   </h3>
                 <span>Graphic Designer</span>
-                <ul>
-                <li><a href="#" title="" class="followw">Follow</a></li>
-                <li><a href="#" title="" class="envlp"><img src="images/envelop.png" alt=""></a></li>
-                <li><a href="#" title="" class="hire">hire</a></li>
-                </ul>
+                
                 <a href="#" title="">View Profile</a>
+                <a href="#">Delete</a>
                 </div>  
     @endforeach
 
@@ -50,12 +53,9 @@
                 <img src="{{ ($list->profileFrom->img==null) ? asset('images/user_no_image.png'): $list->profileFrom->img }}" width="50px" height="50px" alt="">
                     <h3>{{ $list->profileFrom->fname }} {{$list->profileFrom->lname}}   </h3>
                 <span>Graphic Designer</span>
-                <ul>
-                <li><a href="#" title="" class="followw">Follow</a></li>
-                <li><a href="#" title="" class="envlp"><img src="images/envelop.png" alt=""></a></li>
-                <li><a href="#" title="" class="hire">hire</a></li>
-                </ul>
+            
                 <a href="#" title="">View Profile</a>
+                <a href="#">Delete</a>
                 </div>
     @endforeach
 
@@ -80,9 +80,9 @@
             <h3>{{$req->profileFrom->fname}} {{$req->profileFrom->lname}}</h3>
             <span>Graphic Designer</span>
             <ul>
-                <li><a href="#" title="" class="followw">Follow</a></li>
-                <li><a href="#" title="" class="envlp"><img src="images/envelop.png" alt=""></a></li>
-                <li><a href="#" title="" class="hire">hire</a></li>
+                <li><a href="#" title="" class="followw">Accept</a></li>
+              
+                <li><a href="#" title="" class="hire">ignore</a></li>
             </ul>
             <a href="#" title="">View Profile</a>
         </div><!--user-profy end-->
@@ -90,3 +90,5 @@
 
 @endif
 @endsection
+
+

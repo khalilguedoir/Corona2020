@@ -52,5 +52,7 @@
 
     </div>
 </main>
+
+@yield('javascript')
 </body>
 </html>
