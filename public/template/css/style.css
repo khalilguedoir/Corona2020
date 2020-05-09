@@ -1503,6 +1503,13 @@ main {
 	background-color: #466f82;
 	color: #fff;
 }
+/* modified line
+begin */
+.user-profy > .delete:hover {
+	background-color: #fff !important;
+	
+}
+/* end */
 .slick-slide img {
 	display: inline-block;
 }

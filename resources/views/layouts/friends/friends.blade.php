@@ -65,7 +65,8 @@
                                                 @yield('FriendRequest')
                                              </div>
 											</div><!--profiles-slider end-->
-										</div>
+                                        </div>
+                                        @yield('formPlacement')
 </div>
 </div>
 </div>

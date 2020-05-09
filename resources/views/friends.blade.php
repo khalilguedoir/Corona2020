@@ -11,7 +11,7 @@
         <span>Graphic Designer</span>
     
         <a href="{{url('profile/'.$friends['id'].'') }}" title="">View Profile</a>
-        <a href="#" onclick="
+        <a href="#" class="text-danger delete" onclick="
         d = document.getElementById('deleteFriend');
         d.action = '{{action('FriendController@destroy',  $friends['idFriendList'])}}';
         event.preventDefault();
@@ -19,10 +19,7 @@
         </div>
         @endforeach
 
-        <form id="deleteFriend" action="" method="POST" style="display:none">
-            @csrf
-            @method('DELETE')
-        </form>
+      
 @endif
 
 @if(isset($noFriend))
@@ -39,7 +36,11 @@
                 <span>Graphic Designer</span>
                 
                 <a href="#" title="">View Profile</a>
-                <a href="#">Delete</a>
+                <a href="#" class="text-danger delete" onclick="d=document.getElementById('deleteFriend');
+                d.action = '{{action('FriendController@destroy',$list->id )}}';
+                event.preventDefault();
+                document.getElementById('deleteFriend').submit();
+                ">Delete</a>
                 </div>  
     @endforeach
 
@@ -55,18 +56,23 @@
                 <span>Graphic Designer</span>
             
                 <a href="#" title="">View Profile</a>
-                <a href="#">Delete</a>
+                <a href="#" class="text-danger delete" onclick="
+                d = document.getElementById('deleteFriend');
+                d.action = '{{route('friends.destory', $list->id)}}';
+                event.preventDefault();
+                document.getElementById('deleteFriend');
+                ">Delete</a>
                 </div>
     @endforeach
 
 @endif
 
 
-
-
-
 @endsection
 
+
+
+<!-- list des invitation -->
 @section('FriendRequest')
     @if(!$request)
     <h1>No Friend Request on your list</h1>
@@ -89,6 +95,24 @@
      @endforeach
 
 @endif
+
+
 @endsection
 
+@section('formPlacement')
 
+
+<form id="deleteFriend" action="" method="POST" style="display:none">
+            @csrf
+            @method('DELETE')
+        </form>
+<form id="acceptForm" action="" method="POST"  style="position:absolute;visibility:hidden">
+    @csrf 
+    @method('PUT')
+</form>
+
+<form id="ignoreForm" action="" method="POST"  style="position:absolute;display:none;visibility:hidden">
+    @csrf 
+    @method('DELETE')
+</form>
+@endsection
