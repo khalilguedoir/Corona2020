@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\profile;
 use Carbon\Carbon;
-use Symfony\Component\HttpKernel\Profiler\Profile as ProfilerProfile;
+
 
 class conversation extends Controller
 {
@@ -66,7 +66,7 @@ class conversation extends Controller
         $messages = message::where('profile_id', Auth::user()->profile->id)
                                        ->where('profile2_id', $id)
                                         ->orWhere('profile_id', $id)
-                                        ->where('profile2_id', Auth::user()->profile->id)->get();
+                                        ->where('profile2_id', Auth::user()->profile->id)->orderBy('created_at', 'asc')->paginate(4);
         return view('conversation.show', compact('user_one', 'users', 'messages'));
     }
 

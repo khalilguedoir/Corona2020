@@ -268,6 +268,15 @@
 									<a href="#" title=""><i class="fa fa-ellipsis-v"></i></a>
 								</div><!--message-bar-head end-->
 								<div class="messages-line">
+                                @if($messages->previousPageUrl())
+                                      <div class="text-center">
+                                          <a href="{{ $messages->previousPageUrl() }}" class="btn btn-light">
+                                              Voir les messages precedent
+                                          </a>
+
+                                      </div>
+                                    @endif
+
                                     @foreach($messages as $message)
                                     <div class="row">
                                      <div class="col" style="padding: 10px;font-size: 25px;margin: 10px;">
@@ -283,6 +292,15 @@
                                     </div>
                                     </div>
                                     @endforeach
+                                    @if($messages->hasMorePages())
+                                      <div class="text-center">
+                                          <a href="{{ $messages->nextPageUrl() }}" class="btn btn-light">
+                                              Voir les messages suivant
+                                          </a>
+
+                                      </div>
+                                    @endif
+
 								</div><!--messages-line end-->
 								<div class="message-send-area">
 									<form action="{{ route('conversation.store') }}" method="post">
