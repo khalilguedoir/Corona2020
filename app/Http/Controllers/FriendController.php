@@ -19,6 +19,7 @@ class FriendController extends Controller
 
    //hné ena 5arrajt el id ta3 el profile ta3 el user connecté (btw chikoun houa bidou el id ta3 user but for any case of problem or something)
         $friends = Auth::user()->profile()->get('user_id');
+        //el variable $friends bech to5rech sous form collection alors que ena 7achti biha integer so 5arrajtha sou form entier fel star hedha
         $friends = $friends[0]->user_id;
     //Friend request list
         $request = $this->getFriendRequest($friends);                                          
@@ -120,6 +121,15 @@ class FriendController extends Controller
     public function update(Request $request, friend $friend)
     {
         //
+    }
+
+    public function Accept($id)
+    {
+        $friend = friend::find($id);
+        $friend->etat = 1;
+        $friend->save();
+
+        return redirect()->back()->with('friendAccepted','Friend has been Accepted');
     }
 
     /**

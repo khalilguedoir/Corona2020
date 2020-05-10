@@ -38,6 +38,7 @@
 
 
 <div class="container">
+    @yield('MassagesRoute')
     <div class="main-section-data">
     <div class="row">
         <div class="col-6">
