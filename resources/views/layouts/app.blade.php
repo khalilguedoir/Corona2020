@@ -10,9 +10,9 @@
     <title>@yield('title')</title>
 
     <!-- Scripts -->
-    <script src="{{asset('template/js/jquery.min.js')}}"></script>
+    <!-- <script src="{{asset('template/js/jquery.min.js')}}"></script> -->
     
-    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    <script src="{{ asset('js/app.js') }}"></script>
     <script type="text/javascript" src="{{asset('template/js/popper.js')}}"></script>
     <script type="text/javascript" src="{{asset('template/js/bootstrap.js')}}"></script>
     <script type="text/javascript" src="{{asset('template/js/jquery.mCustomScrollbar.js')}}"></script>

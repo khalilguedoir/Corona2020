@@ -5916,9 +5916,9 @@ a:hover {
 	font-weight: 400;
 	padding-bottom: 10px;
 }
-.modal-header h3{
+/* .modal-header h3{
 	font-size: 18px;
-}
+} */
 .search-container button {
     padding: 8px 10px;
     text-align: center;
@@ -6370,13 +6370,13 @@ a:hover {
 	padding-left: 12px;
 }
 
-.modal-header{
+/* .modal-header{
 	background-color: #466f82;
 	display: block!important;
-}
-.modal-body{
+} */
+/* .modal-body{
 	padding: 0;
-}
+} */
 .notice{
 	background-color: #ddf3ff;
 	padding: 15px;
@@ -6453,12 +6453,12 @@ a:hover {
 .sponser{
 	padding:15px;
 }
-.modal-footer{
+/* .modal-footer{
 	display: block!important;
 	border-top: none;
 	padding-bottom: 30px;
-}
-.modal-footer button{
+} */
+/* .modal-footer button{
 	font-size: 15px;
 	font-weight: 500;
 	background-color: unset;
@@ -6466,12 +6466,12 @@ a:hover {
 	padding: 10px;
 	border:1px solid #d2d2d2;
 	border-radius: 3px;
-}
-.modal-footer button:hover{
+} */
+/* .modal-footer button:hover{
 	background-color: #466f82;
 	color: #fff;
 	border:1px soli: #466f82;
-}
+} */
 
 .place-bid-btn {
 	font-size: 15px;
@@ -6678,7 +6678,7 @@ ul#myTab {
 	background-color: #466f82;
 	color: #fff;
 }
-.close{
+/* .close{
 	position: absolute;
     right: -25px;
     top: -25px;
@@ -6687,7 +6687,7 @@ ul#myTab {
     border-radius: 50%;
     height: 25px;
     width: 25px;
-}
+} */
 .mapouter iframe{
 	width:100%;
 	 height:400px;

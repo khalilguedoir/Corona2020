@@ -13,7 +13,7 @@
 @section('friendList')
 
  @if(isset($both))
- @section('nbrFriend',count($both) )
+            @section('nbrFriend',count($both) )
     @foreach($both as $friends)
         <div class="user-profy">
         <img src="{{ ($friends['img']==null) ? asset('images/user_no_image.png'): $friends['img'] }}" width="50px" height="50px" alt="">
@@ -23,9 +23,10 @@
         <a href="{{url('profile/'.$friends['id'].'') }}" title="">View Profile</a>
         <a href="#" class="text-danger delete" onclick="
         d = document.getElementById('removeFriend');
-        d.action = '{{action('FriendController@destroy',  $friends['idFriendList'])}}';
+        d.action= '{{ action('FriendController@destroy',$friends['idFriendList']) }}';
         event.preventDefault();
-    document.getElementById('removeFriend').submit();">Delete</a>
+        d.submit();
+        " data-toggle="modal" data-target="#DeleteF">Delete</a>
         </div>
         @endforeach
 
@@ -39,18 +40,19 @@
 
 @if(isset($listA))
     @section('nbrFriend',$listA->count())
-    @foreach($listA as $list)
+    @foreach($listA as $listac)
         <div class="user-profy">
-                <img src="{{ ($list->profileTo->img==null) ? asset('images/user_no_image.png'): $list->profileTo->img }}" width="50px" height="50px" alt="">
-                    <h3>{{ $list->profileTo->fname }} {{$list->profileTo->lname}}   </h3>
+                <img src="{{ ($listac->profileTo->img==null) ? asset('images/user_no_image.png'): $listac->profileTo->img }}" width="50px" height="50px" alt="">
+                    <h3>{{ $listac->profileTo->fname }} {{$listac->profileTo->lname}}   </h3>
                 <span>Graphic Designer</span>
                 
                 <a href="#" title="">View Profile</a>
-                <a href="#" class="text-danger delete" onclick="d=document.getElementById('removeFriend');
-                d.action = '{{action('FriendController@destroy',$list->id )}}';
+                <a href="#" class="text-danger delete" onclick="
+                d = document.getElementById('removeFriend');
+                d.action = '{{route('friends.destroy',$listac->id)}}';
                 event.preventDefault();
-                document.getElementById('removeFriend').submit();
-                ">Delete</a>
+                d.submit();
+                " data-toggle="modal" data-target="#DeleteF">Delete</a>
                 </div>  
     @endforeach
 
@@ -59,19 +61,19 @@
 
 @if(isset($listI))
     @section('nbrFriend',$listI->count())
-    @foreach($listI as $list)
+    @foreach($listI as $listin)
     <div class="user-profy">
-                <img src="{{ ($list->profileFrom->img==null) ? asset('images/user_no_image.png'): $list->profileFrom->img }}" width="50px" height="50px" alt="">
-                    <h3>{{ $list->profileFrom->fname }} {{$list->profileFrom->lname}}   </h3>
+                <img src="{{ ($listin->profileFrom->img==null) ? asset('images/user_no_image.png'): $listin->profileFrom->img }}" width="50px" height="50px" alt="">
+                    <h3>{{ $listin->profileFrom->fname }} {{$listin->profileFrom->lname}}   </h3>
                 <span>Graphic Designer</span>
             
                 <a href="#" title="">View Profile</a>
                 <a href="#" class="text-danger delete" onclick="
-                d = document.getElementById('removeFriend');
-                d.action = '{{route('friends.destroy', $list->id)}}';
+                d=document.getElementById('removeFriend');
+                d.action='{{action('FriendController@destroy',$listin->id)}}';
                 event.preventDefault();
-                document.getElementById('removeFriend').submit();
-                ">Delete</a>
+                d.submit();
+                " data-toggle="modal" data-target="#DeleteF">Delete</a>
                 </div>
     @endforeach
 
@@ -120,8 +122,6 @@
 @endsection
 
 @section('formPlacement')
-
-
 <form id="removeFriend" action="" method="POST" style="display:none">
             @csrf
             @method('DELETE')
@@ -132,3 +132,5 @@
 </form>
 
 @endsection
+
+
