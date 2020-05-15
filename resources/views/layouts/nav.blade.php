@@ -16,27 +16,7 @@
 	$userNames = Auth::user()->profile()->get('fname');
 	?>
 	@endauth
-	<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Profile</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/animate.css'); ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/bootstrap.min.css'); ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/flatpickr.min.css'); ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/line-awesome.css'); ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/font-awesome.min.css'); ?>">
-	<link href="<?php echo URL::asset('css/all.min.css'); ?>" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/font-awesome.min.css'); ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('lib/slick/slick.css'); ?>" >
-	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('lib/slick/slick-theme.css'); ?>" >
-	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/style.css'); ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/responsive.css'); ?>">
-</head>
-<body>	
+
 	<div class="wrapper">
 		<header>
 			<div class="container">
@@ -122,8 +102,20 @@
 					</div><!--menu-btn end-->
 					<div class="user-account">
 						<div class="user-info">
+						<?php 
+						if (Auth::id()){
+							?>
 							<img src="<?= $imgProfile ?>"  style="width:32px;height:32px"alt="">
 							<a href="#" title=""><?= $userNames[0]->fname ?></a>
+						<?php 
+						}
+						else {
+							?>
+							<img src=""  style="width:32px;height:32px"alt="">
+							<a href="#" title=""></a>
+						<?php
+						}
+						?>
 						</div>
 						<div class="user-account-settingss">
 							<h3>Setting</h3>

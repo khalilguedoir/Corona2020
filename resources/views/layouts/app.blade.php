@@ -38,7 +38,6 @@
     
     @yield('linkSheet')
 </head>
-<body>
   
 @include('layouts.nav')
 <!-- el div class wrapper teb3a tmplate 3ala heka zedtha -->
@@ -49,5 +48,5 @@
         </main>
 
     </div>
-</body>
+
 </html>

@@ -25,6 +25,14 @@ Route::get('/profile', 'ProfileController@infoGet')->name('Profile')->middleware
 Route::post('/ChangePhotoProfile', 'ProfileController@ChangePhotoProfile')->name('ChangePhotoProfile');
 Route::post('/ChangePhotoCov', 'ProfileController@ChangePhotoCouverture')->name('ChangePhotoCouver');
 
+
+Route::get('Profile/{name}', 'FriendController@getProfile');
+
+
+
+
+
+
 Route::get('storage/{filename}', function ($filename)
 {
     $path = storage_path('public/' . $filename);
