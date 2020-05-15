@@ -243,7 +243,7 @@
 													<p>Lorem ipsum dolor <img src="images/smley.png" alt=""></p>
 												</div><!--usr-mg-info end-->
 												<span class="posted_time">1:55 PM</span>
-												<span class="msg-notifc">1</span>
+												<span class="msg-notifc">{{ $user->unread }}</span>
 											</div><!--usr-msg-details end-->
                                         </li></a>
                                         @endforeach
@@ -279,10 +279,10 @@
 
                                     @foreach($messages as $message)
                                     <div class="row">
-                                     <div class="col" style="padding: 10px;font-size: 25px;margin: 10px;">
+                                     <div class="col" style="padding: 10px;font-size: 20px;margin: 10px;">
                                         <div class="{{ $message->profile_id != $user_one->id ? 'offset-md-3 text-right' : ''}}">
 
-                                                {{ $message->msg }}
+                                        {!! nl2br(e( $message->msg)) !!}
 
 
                                              <p>{!! nl2br(e($message->created_at)) !!}</p>

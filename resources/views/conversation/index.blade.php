@@ -243,7 +243,7 @@
 													<p>Lorem ipsum dolor <img src="images/smley.png" alt=""></p>
 												</div><!--usr-mg-info end-->
 												<span class="posted_time">1:55 PM</span>
-												<span class="msg-notifc">1</span>
+												<span class="msg-notifc">{{ $user->unread }}</span>
 											</div><!--usr-msg-details end-->
                                         </li></a>
                                         @endforeach

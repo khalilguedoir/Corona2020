@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\profile;
 use Carbon\Carbon;
-
+use PhpParser\Node\Expr\FuncCall;
+use PHPUnit\Framework\Constraint\Count;
 
 class conversation extends Controller
 {
@@ -20,7 +21,7 @@ class conversation extends Controller
     public function index()
     {
 
-        $users = User::where('id', '!=', Auth::user()->id)->get();
+        $users = $this->getconversations() ;
         return view('conversation.index', compact('users'));
     }
 
@@ -61,12 +62,9 @@ class conversation extends Controller
     public function show($id)
     {
 
-        $users = User::where('id', '!=', Auth::user()->id)->where('id', '!=', $id)->get();
+        $users = $this->getconversations() ;
         $user_one = User::find($id);
-        $messages = message::where('profile_id', Auth::user()->profile->id)
-                                       ->where('profile2_id', $id)
-                                        ->orWhere('profile_id', $id)
-                                        ->where('profile2_id', Auth::user()->profile->id)->orderBy('created_at', 'asc')->paginate(4);
+        $messages = $this->getmessages($id);
         return view('conversation.show', compact('user_one', 'users', 'messages'));
     }
 
@@ -102,5 +100,39 @@ class conversation extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function getconversations()
+    {
+        $convs = User::where('id', '!=', Auth::user()->id)->get();
+        $unread = $this->unread(Auth::user()->id);
+        foreach ($convs as $conv)
+        {
+            if (isset($unread[$conv->id]))
+            {
+                $conv->unread = $unread[$conv->id];
+            }else
+            {
+                $conv->unread = 0;
+            }
+        }
+        return $convs;
+    }
+    public function getmessages($id)
+    {
+        return $m = message::where('profile_id', Auth::user()->profile->id)
+                    ->where('profile2_id', $id)
+                    ->orWhere('profile_id', $id)
+                    ->where('profile2_id', Auth::user()->profile->id)
+                    ->orderBy('created_at', 'asc')
+                    ->paginate(4);
+    }
+    public function unread(int $userid)
+    {
+        return $a = message::where('profile2_id',$userid)
+                      ->groupBy('profile_id')
+                      ->selectRaw('profile_id,COUNT(id) as count')
+                      ->whereRaw('read_at is NULL')
+                      ->get()
+                      ->pluck('count', 'profile_id');
     }
 }
