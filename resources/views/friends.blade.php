@@ -1,5 +1,6 @@
 @extends('layouts.friends.friends')
-
+ <!-- Message de confirmation -->
+ <!-- Begin -->
 @section('MassagesRoute')
     @if(session('friendAccepted'))
         <h4 class="alert alert-primary text-center"> {{session('friendAccepted')}} </h4>
@@ -9,7 +10,7 @@
         <h4 class="alert alert-danger text-center"> {{session('friendDown')}} </h4>
     @endif
 @endsection
-
+ <!-- end -->
 @section('friendList')
 
  @if(isset($both))

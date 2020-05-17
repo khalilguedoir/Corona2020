@@ -20,6 +20,25 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // friend part
 Route::get('/friends','FriendController@index')->middleware('auth')->name('friends.index');
 Route::delete('/friends/destroy/{id}','FriendController@destroy')->name('friends.destroy');
