@@ -44,7 +44,7 @@ class FriendController extends Controller
     {
        $info= DB::table('profiles')
         ->select('profiles.*')
-        ->where('fname','=',$id)
+        ->where('id','=',$id)
         ->get();
         if(!empty($info[0])){
         $fid = $info[0]->id;
