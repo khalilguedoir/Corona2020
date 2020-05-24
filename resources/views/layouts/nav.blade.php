@@ -1,7 +1,14 @@
-<!--(ahmedBranch) hné chna3mel variable chta5edh taswiret el user elli chyod5ol 5ater bech tetaficha fel navbar   -->
+<!--(DaLiBranch) hné sala7et navbar we zedtou 7keyet el auth we messaget   -->
 	<!-- Begin -->
+	<?php
+		use Illuminate\Support\Facades\DB;
+		use App\Http\Controllers\MessageController ;
+		use App\Http\Controllers\FriendController ;
+
+	?>
 	@auth
 	<?php 
+
 	//el image ta3 el user 
 		$img = Auth::user()->profile()->get('img');
 		if($img[0]->img == null)
@@ -17,17 +24,17 @@
 	?>
 	@endauth
 
-	<div class="wrapper">
-		<header>
+		<header class="fixed-top" style="">
+		 <div class="wrapper">
 			<div class="container">
 				<div class="header-data">
 					<div class="logo">
 						<a href="index.html" title=""><img src="images/logo.jpg" alt="" style="margin-top: -4px;margin-left: -26px;width: 45px;"></a>
 					</div><!--logo end-->
 					<div class="search-bar">
-						<form>
-							<input type="text" name="search" placeholder="Search...">
-							<button type="submit"><i class="la la-search"></i></button>
+						<form action="/Search" method="GET">
+							<input type="text" name="name" placeholder="Search...">
+							<button type="submit"><i class="fa fa-search"></i></button>
 						</form>
 					</div><!--search-bar end-->
 					<nav>
@@ -48,7 +55,7 @@
 								</ul>
 							</li>
 							<li>
-								<a href="#" title="" class="not-box-openm">
+								<a href="#"  title="" class="not-box-openm">
 									<span><img src="images/icon6.png" alt=""></span>
 									Messages
 								</a>
@@ -58,37 +65,34 @@
 										<a href="#" title="">Clear all</a>
 									</div>
 									<div class="nott-list">
+									<?php
+									$msgs = MessageController::getFirsts_Msg();
+									foreach($msgs as $msg){
+										if($msg->profile1_id !=Auth::id() ){
+											$f =FriendController::infoPerson($msg->profile1_id);
+										}
+										else{
+											$f =FriendController::infoPerson($msg->profile2_id);
+										}
+									?>
+									<!--    Messages       -->
 										<div class="notfication-details">
 							  				<div class="noty-user-img">
-							  					<img src="images/resources/ny-img1.png" alt="">
+							  					<img src="i<?= $f[0]->img ?>" alt="">
 							  				</div>
 							  				<div class="notification-info">
-							  					<h3><a href="messages.html" title="">Jassica William</a> </h3>
-							  					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do.</p>
+							  					<h3><a href="<?= "Profile/".$f[0]->id ?>" title=""><?= $f[0]->fname." ".$f[0]->lname ?></a></h3>
+							  					<p style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;height: 41px;">
+												  <?= $msg->msg ?>
+												  </p>
 							  					<span>2 min ago</span>
-							  				</div><!--notification-info -->
-						  				</div>
-						  				<div class="notfication-details">
-							  				<div class="noty-user-img">
-							  					<img src="images/resources/ny-img2.png" alt="">
-							  				</div>
-							  				<div class="notification-info">
-							  					<h3><a href="messages.html" title="">Jassica William</a></h3>
-							  					<p>Lorem ipsum dolor sit amet.</p>
-							  					<span>2 min ago</span>
-							  				</div><!--notification-info -->
-						  				</div>
-						  				<div class="notfication-details">
-							  				<div class="noty-user-img">
-							  					<img src="images/resources/ny-img3.png" alt="">
-							  				</div>
-							  				<div class="notification-info">
-							  					<h3><a href="messages.html" title="">Jassica William</a></h3>
-							  					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempo incididunt ut labore et dolore magna aliqua.</p>
-							  					<span>2 min ago</span>
-							  				</div><!--notification-info -->
-						  				</div>
-						  				<div class="view-all-nots">
+										    </div>
+										</div>
+									<!--notification-info -->
+										<?php
+										}
+										?>
+						  			<div class="view-all-nots">
 						  					<a href="messages.html" title="">View All Messsages</a>
 						  				</div>
 									</div><!--nott-list end-->
@@ -131,19 +135,8 @@
 				</div><!--header-data end-->
 			</div>
 		</header><!--header end-->		
+	
 
 
 
-
-
-
-
-
-
-		<script type="text/javascript" src="http://127.0.0.1:8000/js/jquery.min.js" ></script>
-<script type="text/javascript" src="http://127.0.0.1:8000/js/popper.js"></script>
-<script type="text/javascript" src="http://127.0.0.1:8000/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="http://127.0.0.1:8000/js/flatpickr.min.js"></script>
-<script type="text/javascript" src="http://127.0.0.1:8000/js/slick/slick.min.js"></script>
-<script type="text/javascript" src="http://127.0.0.1:8000/js/script.js"></script>
 	<!-- END -->

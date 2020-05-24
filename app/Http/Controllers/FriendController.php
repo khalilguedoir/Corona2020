@@ -16,7 +16,7 @@ class FriendController extends Controller
     public static function infoPerson($id)
     {
         $person= DB::table('profiles')
-        ->select('fname','lname','img','bio')
+        ->select('id','fname','lname','img','bio')
         ->where('id','=',$id)
         ->get();
         return ($person);

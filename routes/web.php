@@ -19,14 +19,17 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// PROFILE
 Route::get('/friend', 'FriendController@GetFriends')->name('Friends');
 Route::get('/profile', 'ProfileController@infoGet')->name('Profile')->middleware('auth');
+Route::get('Profile/{name}', 'FriendController@getProfile');
+// PHOTO
 Route::post('/ChangePhotoProfile', 'ProfileController@ChangePhotoProfile')->name('ChangePhotoProfile');
 Route::post('/ChangePhotoCov', 'ProfileController@ChangePhotoCouverture')->name('ChangePhotoCouver');
+// Search
+Route::get('/Search', 'ProfileController@Search')->name('Search');
 
 
-Route::get('Profile/{name}', 'FriendController@getProfile');
 
 
 

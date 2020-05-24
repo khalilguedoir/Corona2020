@@ -4,14 +4,11 @@
 	<meta charset="UTF-8">
 	<title>Profile</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
 	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/animate.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/bootstrap.min.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/flatpickr.min.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/line-awesome.css'); ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/font-awesome.min.css'); ?>">
-	<link href="<?php echo URL::asset('css/all.min.css'); ?>" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">	<link href="<?php echo URL::asset('css/all.min.css'); ?>" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('css/font-awesome.min.css'); ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('lib/slick/slick.css'); ?>" >
 	<link rel="stylesheet" type="text/css" href="<?php echo URL::asset('lib/slick/slick-theme.css'); ?>" >
@@ -30,7 +27,7 @@
 						$info = $myinfo[0];
 						?>
 	
-
+<br><br><br>
 
 		<section class="cover-sec">
 			<img src="https://kocar.net/wp-content/themes/adventurous/images/demo/header-1-1600x400.jpg" alt="">
@@ -110,8 +107,8 @@
 										?>
 											<div class="suggestion-usd">
 												<img src="<?php if($f[0]->img != null ){ echo $f[0]->img; }else{ echo "http://getdrawings.com/img/cool-facebook-profile-picture-silhouette-2.jpg"; } ?>" style="width:35px;height:35px" alt="">
+													<h4 style="padding-top:7px;margin-left: 45px;"><?=  $f[0]->fname." ". $f[0]->lname ?> </h4>
 												<div class="sgt-text">
-													<h4><?=  $f[0]->fname." ". $f[0]->lname ?> </h4>
 													<span><?=  $f[0]->bio ?></span>
 												</div>
 											</div>
@@ -220,7 +217,7 @@
 														<li>
 															<a href="#"><i class="fas fa-heart" aria-hidden="true"></i> Like</a>
 															<img src="images/liked-img.png" alt="">
-															<span><?php
+															<span style="margin-left: 9px;"><?php
 															$count =CommentaireController::getJaime($publication->id);
 															printf($count);
 															?>

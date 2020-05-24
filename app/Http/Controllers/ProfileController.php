@@ -66,5 +66,22 @@ class ProfileController extends Controller
         );
         return redirect('/profile');
     }
+    public function Search(Request $request)
+    {
+        $words = explode(" ",$request->name);
+
+        $res= DB::table('profiles')
+        ->select('profiles.*')
+        ->where('fname', 'LIKE', $words[0])
+        ->orWhere('lname', 'LIKE', $words[1])
+        ->where('fname', 'LIKE', $words[0])
+        ->orWhere('lname', 'LIKE', $words[1])
+        ->get();
+
+        return view('Search',['result'=>$res]);   
+
+    }
+
+
 
 }
