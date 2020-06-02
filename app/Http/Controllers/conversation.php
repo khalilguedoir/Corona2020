@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\message;
+use App\friend;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\profile;
@@ -103,7 +104,19 @@ class conversation extends Controller
     }
     public function getconversations()
     {
-        $convs = User::where('id', '!=', Auth::user()->id)->get();
+        $conto = friend::select('profile_id_to')->where('profile_id_from', Auth::user()->id)
+                    ->where('etat', 1)
+                    ->pluck('profile_id_to');
+        $confrom = friend::select('profile_id_from')
+                    ->Where('profile_id_to', Auth::user()->id)
+                    ->where('etat', 1)
+                    ->pluck('profile_id_from');
+
+
+        $merged = $conto->merge($confrom);
+        $us = User::all();
+        $convs = $us->whereIn('id', $merged);
+
         $unread = $this->unread(Auth::user()->id);
         foreach ($convs as $conv)
         {
