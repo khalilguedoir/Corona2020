@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use DB;
 use App\profile;
@@ -32,7 +33,47 @@ class ProfileController extends Controller
         return view('Profile',['myinfo'=>$info,'publications'=>$publication]);
 
     }
+    public function Edit()
+    {
+        $id= Auth::id();
+        $info= DB::table('profiles')
+        ->select('profiles.*')
+        ->where('id','=',$id)
+        ->get();
+        return view('Edit',['myinfo'=>$info]);
 
+    }
+ ///////////////////////// Parametre////////////////////////////////////////
+    public function ChangePass(Request $request)
+    {
+        print_r($request->old_password."<br>");
+        $id= Auth::id();
+         if ($request->new_password == $request->repeat_password) {
+             $profile_Up = DB::table('users')
+              ->where('id', $id)
+              ->update(['password' => Hash::make($request->old_password) ]);
+  
+        return redirect('/profile');
+   
+        }
+        else{
+            return redirect('/profile/Edit?error=false');
+
+        }
+    
+    }
+    public function UpdateProfile(Request $request)
+    {
+        $id= Auth::id();
+        $profile_Up = DB::table('users')
+              ->where('id', $id)
+              ->update(['fname' => $request->fname,'lname' => $request->lname,'email' => $request->email,'adress' => $request->adress,'city' => $request->city,'country' => $request->country,'phone' => $request->phone,'bio' => $request->bio,'job' => $request->job ]);
+       
+              return redirect('/profile');
+              // catch return redirect('/profile/Edit?error=falseUpdateProfile');
+    
+    }
+///////////////////////////////////////////////////////////////
     public function ChangePhotoProfile(Request $request)
     {
         $path = $request->img->store('image_profie');

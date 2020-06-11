@@ -29,6 +29,11 @@ Route::post('/ChangePhotoCov', 'ProfileController@ChangePhotoCouverture')->name(
 // Search
 Route::get('/Search', 'ProfileController@Search')->name('Search');
 
+// EDIT
+Route::get('/profile/Edit', 'ProfileController@Edit')->name('Edit');
+Route::get('/profile/EditProfile', 'ProfileController@UpdateProfile')->name('UpdateProfile');
+Route::get('/profile/ChangePass', 'ProfileController@ChangePass')->name('ChangePassword');
+
 
 
 

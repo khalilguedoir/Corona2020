@@ -62,7 +62,7 @@
 								<div class="notification-box msg" id="message">
 									<div class="nt-title">
 										<h4>Setting</h4>
-										<a href="#" title="">Clear all</a>
+										<a href="/Edit" title="">Clear all</a>
 									</div>
 									<div class="nott-list">
 									<?php
@@ -124,7 +124,7 @@
 						<div class="user-account-settingss">
 							<h3>Setting</h3>
 							<ul class="us-links">
-								<li><a href="profile-account-setting.html" title="">Account Setting</a></li>
+								<li><a href="/profile/Edit" title="">Account Setting</a></li>
 								<li><a href="#" title="">Privacy</a></li>
 								<li><a href="#" title="">Faqs</a></li>
 								<li><a href="#" title="">Terms & Conditions</a></li>
