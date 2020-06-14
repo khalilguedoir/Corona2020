@@ -71,3 +71,12 @@
     </div>
 </div>
 @endsection
+
+<script type="text/javascript" src="http://127.0.0.1:8000/js/jquery.min.js" ></script>
+<script type="text/javascript" src="http://127.0.0.1:8000/js/popper.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:8000/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:8000/js/flatpickr.min.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:8000/js/slick/slick.min.js"></script>
+<script type="text/javascript" src="http://127.0.0.1:8000/js/script.js"></script>
+</body>
+</html>

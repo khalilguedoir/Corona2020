@@ -1,85 +1,128 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\profile;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-
+use DB;
+use App\profile;
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+      
+    } 
+    public function commentGet ($id){
+        $pub= DB::table('publications')
+        ->select('publications.*')
+        ->where('profile_id','=',$id)
+        ->get();
+        return ($pub);
+
+    }
+    public function infoGet()
+    {
+        $id= Auth::id();
+        $info= DB::table('profiles')
+        ->select('profiles.*')
+        ->where('id','=',$id)
+        ->get();
+
+        $publication = $this->commentGet($id);
+        return view('Profile',['myinfo'=>$info,'publications'=>$publication]);
+
+    }
+    public function Edit()
+    {
+        $id= Auth::id();
+        $info= DB::table('profiles')
+        ->select('profiles.*')
+        ->where('id','=',$id)
+        ->get();
+        return view('Edit',['myinfo'=>$info]);
+
+    }
+ ///////////////////////// Parametre////////////////////////////////////////
+    public function ChangePass(Request $request)
+    {
+        print_r($request->old_password."<br>");
+        $id= Auth::id();
+         if ($request->new_password == $request->repeat_password) {
+             $profile_Up = DB::table('users')
+              ->where('id', $id)
+              ->update(['password' => Hash::make($request->old_password) ]);
+  
+        return redirect('/profile');
+   
+        }
+        else{
+            return redirect('/profile/Edit?error=false');
+
+        }
+    
+    }
+    public function UpdateProfile(Request $request)
+    {
+        $id= Auth::id();
+        $profile_Up = DB::table('users')
+              ->where('id', $id)
+              ->update(['fname' => $request->fname,'lname' => $request->lname,'email' => $request->email,'adress' => $request->adress,'city' => $request->city,'country' => $request->country,'phone' => $request->phone,'bio' => $request->bio,'job' => $request->job ]);
+       
+              return redirect('/profile');
+              // catch return redirect('/profile/Edit?error=falseUpdateProfile');
+    
+    }
+///////////////////////////////////////////////////////////////
+    public function ChangePhotoProfile(Request $request)
+    {
+        $path = $request->img->store('image_profie');
+        echo $path;
+        $id= Auth::id();
+        // Update  Profile
+       /* $profile_Up = DB::table('profiles')
+              ->where('id', $id)
+              ->update(['img' =>  '127.0.0.1:8000/storage'.'/'.$path]); */
+        // Insert Media
+         DB::table('media')->insert(
+            
+            ['profile_id' => $id, 'source' => '/storage'.'/'.$path  ]
+        );
+        return redirect('/profile');
+
+    }
+    public function ChangePhotoCouverture(Request $request)
+    {
+        $path = $request->img->store('image_couverture');
+        echo $path;
+        $id= Auth::id();
+        // Update  Profile
+        /*$profile_Up = DB::table('profiles')
+              ->where('id', $id)
+              ->update(['img_cov' =>  '127.0.0.1:8000/storage'.'/'.$path]);*/
+        // Insert Media
+         DB::table('media')->insert(
+            
+            ['profile_id' => $id, 'source' => '/storage'.'/'.$path  ]
+        );
+        return redirect('/profile');
+    }
+    public function Search(Request $request)
+    {
+        $words = explode(" ",$request->name);
+
+        $res= DB::table('profiles')
+        ->select('profiles.*')
+        ->where('fname', 'LIKE', $words[0])
+        ->orWhere('lname', 'LIKE', $words[1])
+        ->where('fname', 'LIKE', $words[0])
+        ->orWhere('lname', 'LIKE', $words[1])
+        ->get();
+
+        return view('Search',['result'=>$res]);   
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function show(profile $profile)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(profile $profile)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, profile $profile)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(profile $profile)
-    {
-        //
-    }
 }

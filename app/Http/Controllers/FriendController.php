@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use DB;
 use App\friend;
 use App\profile;
 use App\publication;
@@ -9,11 +10,8 @@ use Illuminate\Http\Request;
 
 class FriendController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
     public function index()
     { 
 
@@ -66,61 +64,52 @@ class FriendController extends Controller
      }
         
        
+    
+        
+    }
+    public static function infoPerson($id)
+    {
+        $person= DB::table('profiles')
+        ->select('id','fname','lname','img','bio')
+        ->where('id','=',$id)
+        ->get();
+        return ($person);
+
+    }
+    public static function GetFriends($id )
+    {
+        $friends= DB::table('friends')
+        ->select('profile_id_to','profile_id_from')
+        ->where('profile_id_from','=',$id,' OR ','profile_id_to','=',$id)
+        ->limit(4)
+        ->get();
+        return ($friends);
+    }
+    public function FriendCommentGet ($id){
+        $pub= DB::table('publications')
+        ->select('publications.*')
+        ->where('profile_id','=',$id)
+        ->get();
+        return ($pub);
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function getProfile($id)
     {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\friend  $friend
-     * @return \Illuminate\Http\Response
-     */
-    public function show(friend $friend)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\friend  $friend
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(friend $friend)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\friend  $friend
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, friend $friend)
-    {
-        //
+       $info= DB::table('profiles')
+        ->select('profiles.*')
+        ->where('id','=',$id)
+        ->get();
+        if(!empty($info[0])){
+        $fid = $info[0]->id;
+        $publication = $this->FriendCommentGet($fid);
+        return view('Profile',['myinfo'=>$info,'publications'=>$publication]);
+        }
+        else{
+            echo "<body style='margin:0' oncontextmenu='return false;'><img src='https://www.mediego.com/wp-content/uploads/2017/08/illustration-page-erreur-404.jpg' style='width:100%;hegith:100%;padding:0;margin:0' /></body>";
+        }
     }
 
     public function Accept($id)

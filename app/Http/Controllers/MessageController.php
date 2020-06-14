@@ -1,85 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
+use DB;
 use App\message;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public static function getFirsts_Msg()
     {
-        //
+        $id= Auth::id();
+        $msgs= DB::table('messages')
+        ->select('messages.*')
+        ->where('profile1_id','=',$id,' OR ','profile2_id','=',$id)
+        ->limit(3)
+        ->get();
+
+    return ($msgs);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function show(message $message)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(message $message)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, message $message)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\message  $message
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(message $message)
-    {
-        //
-    }
 }

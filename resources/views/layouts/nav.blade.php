@@ -47,7 +47,7 @@
 									Profiles
                                 </a>   
 								<ul>
-									<li><a href="companies.html" title="">User Profile</a></li>
+									<li><a href="{{route('Profile')}}" title="">User Profile</a></li>
 									<li><a href="{{url('friends')}}" title="">My Friend List</a></li>
 								</ul>
 							</li>

@@ -47,7 +47,7 @@
                     <h3>{{ $listac->profileTo->fname }} {{$listac->profileTo->lname}}   </h3>
                 <span>Graphic Designer</span>
                 
-                <a href="#" title="">View Profile</a>
+                <a href="{{url('Profile',$listac->profileTo->id)}}" title="">View Profile</a>
                 <a href="#" class="text-danger delete" onclick="
                 d = document.getElementById('removeFriend');
                 d.action = '{{route('friends.destroy',$listac->id)}}';
@@ -68,7 +68,7 @@
                     <h3>{{ $listin->profileFrom->fname }} {{$listin->profileFrom->lname}}   </h3>
                 <span>Graphic Designer</span>
             
-                <a href="#" title="">View Profile</a>
+                <a href="{{url('Profile',$listin->profileFrom->id)}}" title="">View Profile</a>
                 <a href="#" class="text-danger delete" onclick="
                 d=document.getElementById('removeFriend');
                 d.action='{{action('FriendController@destroy',$listin->id)}}';
@@ -113,7 +113,7 @@
                 d.submit();
                 ">ignore</a></li>
             </ul>
-            <a href="#" title="">View Profile</a>
+            <a href="{{url('Profile',$req->profileFrom->id)}}" title="">View Profile</a>
         </div><!--user-profy end-->
      @endforeach
 

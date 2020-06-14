@@ -41,8 +41,7 @@ class LoginController extends Controller
 
     public function authenticate() {
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
-           $_SESSION['email']= $email;
-           return redirect()->intended('dashboard');
+            return redirect()->intended('profile');
         }
      }
 

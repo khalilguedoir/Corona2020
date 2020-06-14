@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\commentaire;
 use Illuminate\Http\Request;
 
@@ -17,69 +17,21 @@ class CommentaireController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public static  function getCommataire($pub_id)
     {
-        //
-    }
+        $comm_pub= DB::table('commentaires')
+        ->select('commentaires.*')
+        ->where('pub_id','=',$pub_id)
+        ->get();
+        return ($comm_pub);
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\commentaire  $commentaire
-     * @return \Illuminate\Http\Response
-     */
-    public function show(commentaire $commentaire)
+    public static  function getJaime($pub_id)
     {
-        //
-    }
+        $count = DB::table('react_pubs')
+        ->where('pub_id','=',$pub_id)
+        ->count('id');
+        return ($count);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\commentaire  $commentaire
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(commentaire $commentaire)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\commentaire  $commentaire
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, commentaire $commentaire)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\commentaire  $commentaire
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(commentaire $commentaire)
-    {
-        //
     }
 }
