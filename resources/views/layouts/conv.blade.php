@@ -17,7 +17,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('lib/slick/slick-theme.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
-	<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+	<script src={{asset('https://kit.fontawesome.com/a076d05399.js')}}></script>
 </head>
 
 

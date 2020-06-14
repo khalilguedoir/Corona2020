@@ -243,7 +243,11 @@
 													<p>Lorem ipsum dolor <img src="images/smley.png" alt=""></p>
 												</div><!--usr-mg-info end-->
 												<span class="posted_time">1:55 PM</span>
-												<span class="msg-notifc">{{ $user->unread }}</span>
+
+                                                    @if(isset($unread[$user->id]))
+                                                    <span class="msg-notifc"> {{ $unread[$user->id] }} </span>
+                                                    @endif
+
 											</div><!--usr-msg-details end-->
                                         </li></a>
                                         @endforeach

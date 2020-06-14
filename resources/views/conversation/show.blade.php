@@ -221,7 +221,7 @@
 						<div class="col-lg-4 col-md-12 no-pdd">
 							<div class="msgs-list">
 								<div class="msg-title">
-									<h3>Messages</h3>
+									<h3>Friends</h3>
 									<ul>
 										<li><a href="#" title=""><i class="fa fa-cog"></i></a></li>
 										<li><a href="#" title=""><i class="fa fa-ellipsis-v"></i></a></li>
@@ -232,7 +232,7 @@
 									<ul>
                                     @foreach($users as $user)
                                     <a href="{{ route('conversation.show', $user->id) }}">
-										<li class="listhover">
+										<li cla ss="listhover">
 											<div class="usr-msg-details">
 												<div class="usr-ms-img">
 													<img src="{{ $user->profile->img }}" class="img-responsive img-circle" alt="">
@@ -243,7 +243,11 @@
 													<p>Lorem ipsum dolor <img src="images/smley.png" alt=""></p>
 												</div><!--usr-mg-info end-->
 												<span class="posted_time">1:55 PM</span>
-												<span class="msg-notifc">{{ $user->unread }}</span>
+
+                                                    @if(isset($unread[$user->id]))
+                                                    <span class="msg-notifc"> {{ $unread[$user->id] }} </span>
+                                                    @endif
+
 											</div><!--usr-msg-details end-->
                                         </li></a>
                                         @endforeach

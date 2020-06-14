@@ -23,7 +23,9 @@ class conversation extends Controller
     {
 
         $users = $this->getconversations() ;
-        return view('conversation.index', compact('users'));
+        $unread = $this->unread(Auth::user()->id);
+        return view('conversation.index', compact('users', 'unread'));
+
     }
 
     /**
@@ -51,7 +53,7 @@ class conversation extends Controller
         $msg->msg = $request->content;
         $msg->created_at = Carbon::now();
         $msg->save();
-        return redirect()->route('conversation.show', $request->to)->with('sent', 'message sent');
+        return redirect()->route('conversation.show', $request->to);
     }
 
     /**
@@ -66,7 +68,12 @@ class conversation extends Controller
         $users = $this->getconversations() ;
         $user_one = User::find($id);
         $messages = $this->getmessages($id);
-        return view('conversation.show', compact('user_one', 'users', 'messages'));
+        $unread = $this->unread(Auth::user()->id);
+        if (isset($unread[$id]))
+         $this->readall($id);
+         $unread[$id] = 0;
+
+        return view('conversation.show', compact('user_one', 'users', 'messages', 'unread'));
     }
 
     /**
@@ -112,22 +119,14 @@ class conversation extends Controller
                     ->where('etat', 1)
                     ->pluck('profile_id_from');
 
-
         $merged = $conto->merge($confrom);
+
         $us = User::all();
+
         $convs = $us->whereIn('id', $merged);
 
         $unread = $this->unread(Auth::user()->id);
-        foreach ($convs as $conv)
-        {
-            if (isset($unread[$conv->id]))
-            {
-                $conv->unread = $unread[$conv->id];
-            }else
-            {
-                $conv->unread = 0;
-            }
-        }
+
         return $convs;
     }
     public function getmessages($id)
@@ -137,7 +136,7 @@ class conversation extends Controller
                     ->orWhere('profile_id', $id)
                     ->where('profile2_id', Auth::user()->profile->id)
                     ->orderBy('created_at', 'asc')
-                    ->paginate(4);
+                    ->paginate(8);
     }
     public function unread(int $userid)
     {
@@ -147,5 +146,10 @@ class conversation extends Controller
                       ->whereRaw('read_at is NULL')
                       ->get()
                       ->pluck('count', 'profile_id');
+    }
+    public function readall($id)
+    {
+      message::where('profile_id',$id)->where('profile2_id',Auth::user()->id)
+           ->update(['read_at' => Carbon::now()]);
     }
 }
