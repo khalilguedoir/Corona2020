@@ -97,15 +97,42 @@ class FriendController extends Controller
     public function getProfile($id)
     {
 
-
+        
        $info= DB::table('profiles')
         ->select('profiles.*')
         ->where('id','=',$id)
         ->get();
         if(!empty($info[0])){
+            //hené Condition idha kén el profile elli chtod5ollou mech amis m3ah jemla 
+            $NotFriends = friend::where('profile_id_to',Auth::id())->where('profile_id_from',$id)->get('id');
+            $NotFriends2 = friend::where('profile_id_from',Auth::id())->where('profile_id_to',$id)->get('id');
+
+            //idha ken inti ba3ethlou invi 9bal
+        $CancelRequest = friend::NonFriends()->where('profile_id_to',$id)->where('profile_id_from',Auth::id())->get('id');
+
+          //idha houa b3athlek invitation
+          $AcceptOrIgnore = friend::NonFriends()->where('profile_id_from',$id)->where('profile_id_to',Auth::id())->get('id');
+            
+          //idha ken intom amis ma3 b3adhkom ya jon
+          $deleteFriend = friend::AreFirends()->where('profile_id_from',$id)->where('profile_id_to',Auth::id())->get('id');
+          $deleteFriend1 = friend::AreFirends()->where('profile_id_to',$id)->where('profile_id_from',Auth::id())->get('id');
+
+
         $fid = $info[0]->id;
         $publication = $this->FriendCommentGet($fid);
-        return view('Profile',['myinfo'=>$info,'publications'=>$publication]);
+                if($NotFriends->isEmpty() && $NotFriends2->isEmpty()){
+                    return view('Profile',['myinfo'=>$info,'publications'=>$publication,'NotFriends'=>'1']);
+                }elseif(!$deleteFriend->isEmpty() || !$deleteFriend1->isEmpty()){
+                        if($deleteFriend->isEmpty())
+                    return view('Profile',['myinfo'=>$info,'publications'=>$publication,'AreFriends'=>$deleteFriend1[0]->id]);
+                    else
+                    return view('Profile',['myinfo'=>$info,'publications'=>$publication,'AreFriends'=>$deleteFriend[0]->id]);
+                }elseif(!$AcceptOrIgnore->isEmpty()){
+                    return view('Profile',['myinfo'=>$info,'publications'=>$publication,'Accept'=>$AcceptOrIgnore[0]->id]);
+                }else{
+                    return view('Profile',['myinfo'=>$info,'publications'=>$publication,'CancelReq'=>$CancelRequest[0]->id]);
+                }
+            
         }
         else{
             echo "<body style='margin:0' oncontextmenu='return false;'><img src='https://www.mediego.com/wp-content/uploads/2017/08/illustration-page-erreur-404.jpg' style='width:100%;hegith:100%;padding:0;margin:0' /></body>";
@@ -132,7 +159,7 @@ class FriendController extends Controller
         //
         $frienddel = friend::find($friend);
         $frienddel->delete();
-       return redirect()->route('friends.index')->with('friendDown', 'Hakka tfassa5 3chir 3omrek ? ');
+       return redirect()->back()->with('friendDown', 'Friend tefsa5 ');
     }
 
 

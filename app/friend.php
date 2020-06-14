@@ -27,4 +27,6 @@ class friend extends Model
     {
         return $query->where('etat',0);
     }
+
+    
 }

@@ -21,7 +21,7 @@
             <h3>{{ $friends['fname'] }} {{$friends['lname']}}   </h3>
         <span>Graphic Designer</span>
     
-        <a href="{{url('profile/'.$friends['id'].'') }}" title="">View Profile</a>
+        <a href="{{url('Profile/'.$friends['id'].'') }}" title="">View Profile</a>
         <a href="#" class="text-danger delete" onclick="
         d = document.getElementById('removeFriend');
         d.action= '{{ action('FriendController@destroy',$friends['idFriendList']) }}';

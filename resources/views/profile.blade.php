@@ -28,7 +28,7 @@
 								<label for="img">Change Image</label>	
 								@csrf
 							</form>	
-							<span>add</span>		
+						
 						</div>
 					<?php } ?>
 					</div>
@@ -56,14 +56,66 @@
 
 												</form>
 												</div>
+										
 												<?php 
 													}
 												?>
+						
 										</div><!--user-pro-img end-->
 										<div class="user_pro_status">
 											<ul class="flw-status">
 												<li>
-													<span>Following</span>
+												@if(isset($NotFriends))
+								<span><input type="button" value="Send Friend Request" class="btn btn-primary mt-3"></span>	
+														
+							@endif
+
+							@if(isset($AreFriends))	
+							<span><input type="button" value="delete Friend" class="btn btn-danger mt-3" onclick="
+							d = document.getElementById('DeleteFriend');
+							event.preventDefault();
+							d.submit();"></span>
+
+							<form action="{{route('friends.destroy', $AreFriends)}}" id="DeleteFriend" style="position:absolute;visibility:hidden" method="POST">
+													@csrf
+													@method('DELETE')
+							</form>
+						
+							@endif
+
+							@if(isset($Accept))
+							<span><input type="button" value="Accept" class="btn btn-primary mt-3" onclick="
+							d = document.getElementById('acceptForm');
+							event.preventDefault();
+							d.submit();"></span>
+							<span><input type="button" value="Ignore" class="btn btn-danger mt-3" onclick="
+							d = document.getElementById('DeleteFriend');
+							event.preventDefault();
+							d.submit();"></span>
+
+							<form action="{{route('friends.destroy', $Accept)}}" id="DeleteFriend" style="position:absolute;visibility:hidden" method="POST">
+													@csrf
+													@method('DELETE')
+							</form>
+						
+
+							<form id="acceptForm" action="{{action('FriendController@Accept',$Accept)}}" method="POST"  style="position:absolute;visibility:hidden">
+								@csrf 
+								@method('PUT')
+							</form>
+							@endif
+
+							@if(isset($CancelReq))
+							<span><input type="button" value="Cancel request" class="btn btn-danger mt-3" onclick="
+							d=document.getElementById('DeleteFriend');
+							event.preventDefault();
+							d.submit();"></span>
+						
+							<form action="{{route('friends.destroy', $CancelReq)}}" id="DeleteFriend" style="position:absolute;visibility:hidden">
+													@csrf
+													@method('DELETE')
+							</form>
+							@endif
 													<b>34</b>
 												</li>
 	
@@ -251,5 +303,5 @@
 				</div>
 			</div>
 		</footer><!--footer end-->
-
+	   					
 @endsection
