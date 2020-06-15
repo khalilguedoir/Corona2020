@@ -66,7 +66,17 @@
 											<ul class="flw-status">
 												<li>
 												@if(isset($NotFriends))
-								<span><input type="button" value="Send Friend Request" class="btn btn-primary mt-3"></span>	
+								<span><input type="button" value="Send Friend Request" class="btn btn-primary mt-3" onclick="
+								d=document.getElementById('sendRequest');
+								event.preventDefault();
+								d.submit();"></span>	
+
+								<form action="{{route('Envoyer.Invitation')}}" method="POST" id="sendRequest" style="position:absolute;visibility:hidden">
+													@csrf
+													<input type="text" name="profile_id_from" value="{{Auth::user()->id}}" hidden>
+													<input type="text" name="profile_id_to" value="{{$info->id}}" hidden>
+													<!-- <input type="text" name="etat" value="0" hidden> -->
+								</form>
 														
 							@endif
 
@@ -111,7 +121,7 @@
 							event.preventDefault();
 							d.submit();"></span>
 						
-							<form action="{{route('friends.destroy', $CancelReq)}}" id="DeleteFriend" style="position:absolute;visibility:hidden">
+							<form action="{{route('friends.destroy', $CancelReq)}}" method="POST" id="DeleteFriend" style="position:absolute;visibility:hidden">
 													@csrf
 													@method('DELETE')
 							</form>

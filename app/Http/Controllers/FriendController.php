@@ -139,6 +139,20 @@ class FriendController extends Controller
         }
     }
 
+
+
+
+    //envoyer invitation
+    public function EnvInv(Request $request)
+    {
+        $friend = new friend();
+        $friend->profile_id_from = $request->profile_id_from;
+        $friend->profile_id_to = $request->profile_id_to;
+        $friend->etat = 0;
+        $friend->save();
+        return redirect()->back();
+    }
+
     public function Accept($id)
     {
         $friend = friend::find($id);
