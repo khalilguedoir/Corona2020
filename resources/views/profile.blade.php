@@ -245,9 +245,13 @@
 															<?php } ?>
 												</div>
 												<br>
+												<form action="/comment" method="post">
 												<div class="mf-field" style="margin-top:15px">
+											<input type="hidden" name="id_comment" value="<?= $publication->id ?>" />
+						
 											<input type="text" name="message" style="margin-left: 40px;width: 70%;" placeholder="Type Comment">
 											<button type="submit" style="margin-left: 0;">Pub</button>
+												</form>
 										</div>
                                            </div>
                                     <!-- PUBBB -->

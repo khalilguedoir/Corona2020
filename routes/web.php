@@ -35,6 +35,11 @@ Route::get('/profile/EditProfile', 'ProfileController@UpdateProfile')->name('Upd
 Route::get('/profile/ChangePass', 'ProfileController@ChangePass')->name('ChangePassword');
 
 
+//Comm
+Route::post('/comment', 'CommentaireController@PubComment')->name('Comment');
+
+
+
 
 
 

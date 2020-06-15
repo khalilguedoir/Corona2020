@@ -26,6 +26,19 @@ class CommentaireController extends Controller
         return ($comm_pub);
 
     }
+    public function PubComment(Request $request)
+    {
+        $id= Auth::id();
+        var_dump($comnt= $request->message);
+        $id_pub= $request->id_comment;
+        /*$comnts = DB::table('commentaires')->insert(
+            ['pub_id' => $pub_id,'profile_id' => $id,'commentaire' => $comnt ]
+        );
+      
+              return redirect('/accuiel');
+    */
+    }
+   
     public static  function getJaime($pub_id)
     {
         $count = DB::table('react_pubs')
